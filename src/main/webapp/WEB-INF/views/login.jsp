@@ -139,10 +139,10 @@ span.psw {
     </div>
 	
     <div class="container">
-      <input type="text" placeholder="Enter Username" name="username" id="username"  >
+      <input type="text" placeholder="Enter Username" name="username" id="username" minlength=5 maxlength=50 >
       <span class="alert" id="usernamealert"></span>
 		<br>
-      <input type="password" placeholder="Enter Password" name="password" id="password" >
+      <input type="password" placeholder="Enter Password" name="password" id="password" minlength=5 maxlength=50  >
       <span class="alert" id="passwordalert"></span>
         
       <button type="button" onclick="post()">Login</button>
