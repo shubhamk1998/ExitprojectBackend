@@ -2,6 +2,7 @@ package com.nagarro.restapp.services;
 
 
 import org.glassfish.jersey.internal.inject.AbstractBinder;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
@@ -15,6 +16,7 @@ public class MyApplication extends ResourceConfig {
 	 * Register JAX-RS application components.
 	 */
 	public MyApplication() {
+		register(MultiPartFeature.class);
 		register(RequestContextFilter.class);
 		register(FlightController.class);
 		 register(new AbstractBinder() {

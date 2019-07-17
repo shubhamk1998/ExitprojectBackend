@@ -1,8 +1,9 @@
 package com.nagarro.restapp.dao;
 
-import java.text.ParseException;
+	import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,12 +53,23 @@ public class FlightsDaoImplementation implements FlightsDao {
         Transaction tx = session.beginTransaction();        
         Flights flight = new Flights();
         flight.setEmail(Email);
-        flight.setDOB(dOB);
-        flight.setName(Name);
-        flight.setLocation(location);
-        session.save(flight);    
-		tx.commit();
-		return "Created";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
+        SimpleDateFormat output = new SimpleDateFormat("yyyy-mm-dd");
+        Date data = null;
+		try {
+			data = sdf.parse(dOB);
+			String formattedTime = output.format(data);
+	        flight.setDOB(formattedTime);
+	        flight.setName(Name);
+	        flight.setLocation(location);
+	        session.save(flight);    
+			tx.commit();
+			return "Created";
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return "Error";
+		}
+        
 	}
 
 	@Transactional

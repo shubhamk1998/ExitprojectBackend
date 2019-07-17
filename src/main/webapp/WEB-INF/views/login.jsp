@@ -131,6 +131,7 @@ span.psw {
 <title>Login Page</title>
 <%@ page isELIgnored="false" %>
 </head>
+
 <body>
   <form class="modal-content animate" id="postform"  action="Login" method="post" style="text-align:center">
     <div class="imgcontainer">

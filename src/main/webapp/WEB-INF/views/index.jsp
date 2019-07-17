@@ -11,12 +11,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 
 <html>
 <head>
@@ -25,39 +20,77 @@
 <title>Search Page</title>
 </head>
 <script type="text/javascript">
-var msg='${sessionScope.authorized}';
+	var msg = '${sessionScope.authorized}';
 	console.log(msg);
-	if (msg === "false" || msg === "" || msg === null) {console.log(msg) 
-		window.location.href="/RestApp";
+	if (msg === "false" || msg === "" || msg === null) {
+		console.log(msg)
+		window.location.href = "/RestApp";
 <%session.removeAttribute("authorized");%>
 	}
 </script>
 <body>
-	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">HR Management Portal </a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Home</a></li>
-			<li><a href="#">Page 1</a></li>
-			<li><a href="#">Page 2</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li style="color:white"><a> Welcome ${sessionScope.user}</a>
-			</li>
-			<li><a style="cursor:pointer" onclick="<%session.removeAttribute("authorized");%>;window.location.href='/RestApp';
-			"><span class="glyphicon glyphicon-log-in"></span>
-					Logout</a></li>
-		</ul>
-	</div>
-	</nav>
+	<jsp:include page="header.jsp" />
+
 
 	<div class="container-fluid" style="margin-top: 30px">
 
-		<button type="button" class="btn btn-success"  onclick="$('#myModal').modal('show');$('#editIDdiv').hide();" style="float:right" data-dismiss="modal">Add New Employee</button>
+		<button type="button" class="btn btn-danger"
+			onclick="$('#myModal').modal('show');$('#editIDdiv').hide();"
+			style="float: right" data-dismiss="modal">Add New Employee</button>
+		&nbsp;&nbsp;
+		
+  <button type="button" class="btn btn-info"
+			style="float: right" onclick="download()"  data-dismiss="modal">Download  Employee Details Details</button>
+		&nbsp;&nbsp;
+		
+		<button type="button" class="btn btn-success"
+			onclick="$('#bulk').modal('show');$('#editIDdiv').hide();"
+			style="float: right" data-dismiss="modal">Upload Employee
+			Details</button>
 
 		<div class="col">
+			<div class="modal fade" id="bulk" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header" style="padding: 35px 50px;">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4>
+								<span class="glyphicon glyphicon-lock"></span> Bulk Upload
+								Utility
+							</h4>
+						</div>
+						<div class="modal-body" style="padding: 40px 50px;">
+							<form role="form">
+								<div class="form-group">
+									<label for="psw"><span
+										class="glyphicon glyphicon-eye-open"></span> Select File </label> <input
+										type="file" accept=".csv" required class="form-control"
+										id="bulkfile">
+								</div>
+								<span id="bulkalert"> </span>
+								<div class="modal-footer container-fluid">
+									<div class="row">
+										<button type="button" onclick="bulkUpload()"
+											class=" col-6 btn btn-success btn-block">
+											<span class="glyphicon glyphicon-off"></span> Bulk Upload
+										</button>
+										<button type="button" class=" col-6 btn btn-danger btn-block "
+											class="close" data-dismiss="modal">
+											<span class="glyphicon glyphicon-off"></span> Cancel
+										</button>
+									</div>
+								</div>
+
+
+							</form>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
 
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog">
@@ -67,7 +100,7 @@ var msg='${sessionScope.authorized}';
 						<div class="modal-header" style="padding: 35px 50px;">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4>
-								<span class="glyphicon glyphicon-lock"></span> User 
+								<span class="glyphicon glyphicon-lock"></span> User
 							</h4>
 						</div>
 						<div class="modal-body" style="padding: 40px 50px;">
@@ -81,20 +114,20 @@ var msg='${sessionScope.authorized}';
 								<div class="form-group">
 									<label for="usrname"><span
 										class="glyphicon glyphicon-user"></span> Name</label> <input
-										type="text" class="form-control" id="editName"
+										type="text" class="form-control" id="editName" maxlength=100
 										placeholder="Enter NAme">
 								</div>
 								<div class="form-group">
 									<label for="psw"><span
 										class="glyphicon glyphicon-eye-open"></span> Email</label> <input
-										type="email" class="form-control" id="editEmail"
+										type="email" class="form-control" id="editEmail" maxlength=100
 										placeholder="Enter EMail">
 								</div>
 								<div class="form-group">
 									<label for="psw"><span
 										class="glyphicon glyphicon-eye-open"></span> Location</label> <input
 										type="text" class="form-control" id="editLocation"
-										placeholder="Enter Location">
+										maxlength=500 placeholder="Enter Location">
 								</div>
 								<div class="form-group">
 									<label for="psw"><span
@@ -147,15 +180,11 @@ var msg='${sessionScope.authorized}';
 		</table>
 
 
-		<div class="container-fluid" style="display: none; text-align: Center">
-			<h3>No Flights Found</h3>
-		</div>
-
 	</div>
 	</div>
 	<script>
-	var baseurl = "http://localhost:3000/RestApp/rest/Users/";
-    
+		var baseurl = "http://localhost:3000/RestApp/rest/Users/";
+
 		function loadall() {
 			console.log("loadcallled");
 			$
@@ -166,9 +195,11 @@ var msg='${sessionScope.authorized}';
 							//  $('#current_page').append("loading..");
 						},
 						success : function(data) {
-							$('#usertable > tbody')[0].innerHTML ="";
+							$('#usertable > tbody')[0].innerHTML = "";
 
-							JSON.parse(data).forEach(
+							JSON
+									.parse(data)
+									.forEach(
 											function(element) {
 												$('#usertable > tbody')
 														.append(
@@ -197,7 +228,7 @@ var msg='${sessionScope.authorized}';
 			console.log($('#myModal'));
 			$('#myModal').modal('show');
 			$.ajax({
-				url : baseurl + 'getuser?id='+id,
+				url : baseurl + 'getuser?id=' + id,
 				type : "GET",
 				beforeSend : function() {
 					//  $('#current_page').append("loading..");
@@ -212,16 +243,46 @@ var msg='${sessionScope.authorized}';
 					$('#editEmail').val(data[0]['Email']);
 					$('#editLocation').val(data[0]['Location']);
 					$('#editDOB').val(data[0]['DOB'])
-							
+
 				}
 			});
-			
-}
+
+		}
+
+		function bulkUpload() {
+
+			if ($('#bulkfile').val() === ""
+					|| $('#bulkfile').val() === undefined) {
+				$("#bulkalert").text("Please select a file to Upload");
+				return;
+			} else {
+				var data = new FormData();
+				data.append("file", $("#bulkfile").prop('files')[0]);
+				$.ajax({
+					url : baseurl + "upload",
+					type : "POST",
+					data : data,
+					processData : false,
+					contentType : false,
+					success : function(result) {
+						console.log(result);
+						alert("User Added");
+						$('#bulk').modal('hide');
+						loadall();
+
+					},
+					error : function(result) {
+						alert("Error: " + result)
+					}
+
+				});
+			}
+		}
 
 		function delet(id) {
 			$.ajax({
-				url : baseurl + 'deleteuser?id='+id,
-				type : "GET",
+				url : baseurl + 'deleteuser?id=' + id,
+				type : "DELETE",
 				beforeSend : function() {
 					//  $('#current_page').append("loading..");
 				},
@@ -230,36 +291,53 @@ var msg='${sessionScope.authorized}';
 					loadall();
 				}
 			});
-			
-}
-		
-		
+
+		}
+
 		function save() {
-			let url ="";
-			if($('#editId').val()===""){
-				url = baseurl + 'createuser?Email='+$('#editEmail').val()+'&Name='+$('#editName').val()+'&Location='+$('#editLocation').val()+'&DOB='+$('#editDOB').val();
+			let url = "";
+			if ($('#editId').val() === "") {
+				url = baseurl + 'createuser?Email=' + $('#editEmail').val()
+						+ '&Name=' + $('#editName').val() + '&Location='
+						+ $('#editLocation').val() + '&DOB='
+						+ $('#editDOB').val();
+				type = "GET"
 			} else {
-				url = baseurl + 'edituser?id='+$('#editId').val()+'&Email='+$('#editEmail').val()+'&Name='+$('#editName').val()+'&Location='+$('#editLocation').val()+'&DOB='+$('#editDOB').val();
+				url = baseurl + 'edituser?id=' + $('#editId').val() + '&Email='
+						+ $('#editEmail').val() + '&Name='
+						+ $('#editName').val() + '&Location='
+						+ $('#editLocation').val() + '&DOB='
+						+ $('#editDOB').val();
+				type = "PUT"
+
 			}
 			$.ajax({
-				url:url,
-				type : "GET",
+				url : url,
+				type : type,
 				beforeSend : function() {
 					//  $('#current_page').append("loading..");
 				},
 				success : function(data) {
-					console.log(data)	;
+					console.log(data);
 					$('#myModal').modal('hide');
+
 					loadall();
 				}
 			});
-			
+
 		}
 		
-
+		function download() {
+			window.open(baseurl+'downloadCSV', '_blank');
+		}
 
 		$(document).ready(function() {
 			loadall();
+			
+			
+		});
+		$('#myModal').on('hidden.bs.modal', function(){
+			$('#myModal input').val("");
 		});
 	</script>
 </body>
