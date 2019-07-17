@@ -62,17 +62,17 @@
 							</h4>
 						</div>
 						<div class="modal-body" style="padding: 40px 50px;">
-							<form role="form">
+							<form role="form" onsubmit="bulkUpload()">
 								<div class="form-group">
 									<label for="psw"><span
 										class="glyphicon glyphicon-eye-open"></span> Select File </label> <input
-										type="file" accept=".csv" required class="form-control"
-										id="bulkfile">
+										type="file" accept=".csv"  class="form-control"
+										id="bulkfile" required>
 								</div>
 								<span id="bulkalert"> </span>
 								<div class="modal-footer container-fluid">
 									<div class="row">
-										<button type="button" onclick="bulkUpload()"
+										<button type="submit" 
 											class=" col-6 btn btn-success btn-block">
 											<span class="glyphicon glyphicon-off"></span> Bulk Upload
 										</button>
@@ -104,7 +104,7 @@
 							</h4>
 						</div>
 						<div class="modal-body" style="padding: 40px 50px;">
-							<form role="form">
+							<form role="form" onsubmit="save()">
 								<div class="form-group" id="editIDdiv">
 									<label for="psw"><span
 										class="glyphicon glyphicon-eye-open"></span> ID </label> <input
@@ -114,32 +114,32 @@
 								<div class="form-group">
 									<label for="usrname"><span
 										class="glyphicon glyphicon-user"></span> Name</label> <input
-										type="text" class="form-control" id="editName" maxlength=100
+										type="text" class="form-control" required id="editName" maxlength=100
 										placeholder="Enter NAme">
 								</div>
 								<div class="form-group">
 									<label for="psw"><span
 										class="glyphicon glyphicon-eye-open"></span> Email</label> <input
-										type="email" class="form-control" id="editEmail" maxlength=100
+										type="email" class="form-control" required id="editEmail" maxlength=100
 										placeholder="Enter EMail">
 								</div>
 								<div class="form-group">
 									<label for="psw"><span
 										class="glyphicon glyphicon-eye-open"></span> Location</label> <input
 										type="text" class="form-control" id="editLocation"
-										maxlength=500 placeholder="Enter Location">
+										maxlength=500 required placeholder="Enter Location">
 								</div>
 								<div class="form-group">
 									<label for="psw"><span
 										class="glyphicon glyphicon-eye-open"></span> DOB</label> <input
 										type="date" class="form-control" id="editDOB"
-										placeholder="Enter password">
+										placeholder="Enter password" required>
 								</div>
 								<div class="modal-footer container-fluid">
 									<div class="row">
-										<button type="button" onclick="save()"
+										<button type="submit" 
 											class=" col-6 btn btn-success btn-block">
-											<span class="glyphicon glyphicon-off"></span> Save
+												 Save
 										</button>
 										<button type="button" class=" col-6 btn btn-danger btn-block "
 											class="close" data-dismiss="modal">
@@ -340,5 +340,7 @@
 			$('#myModal input').val("");
 		});
 	</script>
+		<jsp:include page="footer.jsp" />
+	
 </body>
 </html>

@@ -53,22 +53,14 @@ public class FlightsDaoImplementation implements FlightsDao {
         Transaction tx = session.beginTransaction();        
         Flights flight = new Flights();
         flight.setEmail(Email);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-        SimpleDateFormat output = new SimpleDateFormat("yyyy-mm-dd");
-        Date data = null;
-		try {
-			data = sdf.parse(dOB);
-			String formattedTime = output.format(data);
-	        flight.setDOB(formattedTime);
+        
+	        flight.setDOB(dOB);
 	        flight.setName(Name);
 	        flight.setLocation(location);
 	        session.save(flight);    
 			tx.commit();
 			return "Created";
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return "Error";
-		}
+		
         
 	}
 
