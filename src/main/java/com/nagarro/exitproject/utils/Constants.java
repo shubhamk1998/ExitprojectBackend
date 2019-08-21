@@ -1,4 +1,4 @@
-package com.nagarro.restapp.utils;
+package com.nagarro.exitproject.utils;
 
 public class Constants {
 

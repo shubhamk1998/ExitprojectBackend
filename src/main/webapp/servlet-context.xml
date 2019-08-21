@@ -56,11 +56,11 @@
 		</beans:property>
 	</beans:bean>
 	
-	<beans:bean id="UserDao" class="com.nagarro.restapp.dao.UserDaoImplementation">
+	<beans:bean id="SellersDao" class="com.nagarro.exitproject.dao.SellersDaoImplementation">
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 	<beans:bean id="loginService" class="com.nagarro.restapp.services.LoginServiceImplementation">
-		<beans:property name="UserDao" ref="UserDao"></beans:property>
+		<beans:property name="SellersDao" ref="SellersDao"></beans:property>
 	</beans:bean>
 	
 	

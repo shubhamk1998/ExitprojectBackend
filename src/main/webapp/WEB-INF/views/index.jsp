@@ -286,7 +286,7 @@
 				beforeSend : function() {
 					//  $('#current_page').append("loading..");
 				},
-				success : function(data) {
+				success : function(b) {
 					console.log(data)
 					loadall();
 				}
@@ -314,9 +314,6 @@
 			$.ajax({
 				url : url,
 				type : type,
-				beforeSend : function() {
-					//  $('#current_page').append("loading..");
-				},
 				success : function(data) {
 					console.log(data);
 					$('#myModal').modal('hide');

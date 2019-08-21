@@ -1,4 +1,4 @@
-package com.nagarro.restapp.controllers;
+package com.nagarro.exitproject.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.nagarro.restapp.models.User;
-import com.nagarro.restapp.services.LoginService;
+import com.nagarro.exitproject.models.Sellers;
+import com.nagarro.exitproject.services.AdminService;
 
 @Controller
-public class LoginController {
+public class AdminController {
 
-	private LoginService loginService;
+	private AdminService loginService;
 
 	@Autowired(required = true)
 	@Qualifier(value = "loginService")
-	public void setLoginService(LoginService ls) {
+	public void setLoginService(AdminService ls) {
 		this.loginService = ls;
 	}
 
@@ -35,7 +35,7 @@ public class LoginController {
 	public String login(HttpServletRequest request, @RequestParam String username, @RequestParam String password,
 			ModelAndView m) {
 		if (this.loginService.userAuthentication(username, password)) {
-			User user = this.loginService.getUserDetails(username);
+			Sellers user = this.loginService.getUserDetails(username);
 			request.getSession().setAttribute("authorized", true);
 			request.getSession().setAttribute("user", user.getFullName());
 			return "index";

@@ -1,4 +1,4 @@
-package com.nagarro.restapp.services;
+package com.nagarro.exitproject.services;
 
 
 import org.glassfish.jersey.internal.inject.AbstractBinder;
@@ -6,9 +6,9 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
-import com.nagarro.restapp.controllers.FlightController;
-import com.nagarro.restapp.dao.FlightsDao;
-import com.nagarro.restapp.dao.FlightsDaoImplementation;
+import com.nagarro.exitproject.controllers.SellerRestController;
+import com.nagarro.exitproject.dao.SellersDao;
+import com.nagarro.exitproject.dao.SellersDaoImplementation;
 
 public class MyApplication extends ResourceConfig {
 
@@ -18,12 +18,12 @@ public class MyApplication extends ResourceConfig {
 	public MyApplication() {
 		register(MultiPartFeature.class);
 		register(RequestContextFilter.class);
-		register(FlightController.class);
+		register(SellerRestController.class);
 		 register(new AbstractBinder() {
 	            @Override
 	            protected void configure() {
-            	    bind(FlightsDaoImplementation.class).to(FlightsDao.class);
-	            	    bind(FlightImplementation.class).to(FlightService.class);
+            	    bind(SellersDaoImplementation.class).to(SellersDao.class);
+	            	    bind(SellerServiceImplementation.class).to(SellerService.class);
 	            }
 	        });
 	}

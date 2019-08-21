@@ -1,4 +1,4 @@
-package com.nagarro.restapp.dao;
+package com.nagarro.exitproject.dao;
 
 import javax.transaction.Transactional;
 
@@ -7,10 +7,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
-import com.nagarro.restapp.models.User;
+import com.nagarro.exitproject.models.Sellers;
 
 @Repository
-public class  UserDaoImplementation implements UserDao {
+public class  AdminsDaoImplementation implements AdminsDao {
 	
 	private SessionFactory sessionFactory;
 	
@@ -20,10 +20,10 @@ public class  UserDaoImplementation implements UserDao {
 	
 	@Override
 	@Transactional
-	public User getUserDetails(String username) {
+	public Sellers getUserDetails(String username) {
 		Session session = this.sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();  
-		User user = (User) session.load(User.class, username);
+		Sellers user = (Sellers) session.load(Sellers.class, username);
 		tx.commit();
 		return user;
 	}
@@ -37,7 +37,7 @@ public class  UserDaoImplementation implements UserDao {
                Transaction tx = session.beginTransaction();  
 
                try {
-            	   User user = (User) session.get(User.class, username);
+            	   Sellers user = (Sellers) session.get(Sellers.class, username);
             	   tx.commit();
 
                    if (user.getUsername() != null && user.getPassword().equals(password))
