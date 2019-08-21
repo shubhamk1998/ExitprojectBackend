@@ -67,6 +67,74 @@ public class SellersDaoImplementation implements SellersDao {
 		tx.commit();
 		return "Created";
 	}
+	
+
+	@Override
+	@Transactional
+	public String getsellers() {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Criteria cr = session.createCriteria(Sellers.class);
+		List<Sellers> list = cr.list();
+		tx.commit();
+		return list.toString();
+	}
+
+	@Override
+	public String searchsellers(String query, String options) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Criteria cr = session.createCriteria(Sellers.class);
+
+		// Filter by Name
+		if(options.equals("1") ) {
+			cr.add(Restrictions.like("CompanyName", query));
+		}
+		//Filter by Seller Product Code
+		else if ( options.equals("2")){
+			cr.add(Restrictions.eq("Username", query));	
+		}
+		//Filter By YourMart Code
+		else {
+			cr.add(Restrictions.eq("Mobile", query));				
+		}	
+		List<Products> list  = cr.list();
+		tx.commit();
+		return list.toString();
+	}
+
+	@Override
+	public String filtersellers(String query, String options) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Criteria cr = session.createCriteria(Sellers.class);
+		cr.add(Restrictions.eq("Status", query));
+		List<Sellers> list  = cr.list();
+		tx.commit();
+		return list.toString();
+	}
+	
+	@Override
+	public String sortsellers(String query, String options) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Criteria cr = session.createCriteria(Sellers.class);
+		cr.add(Restrictions.eq("Status", query));
+		List<Sellers> list  = cr.list();
+		tx.commit();
+		return list.toString();
+	}
+
+
+	@Override
+	public String getseller(String sellerid) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Criteria cr = session.createCriteria(Sellers.class);
+	    Sellers seller = (Sellers)cr.uniqueResult();
+		tx.commit();
+		return seller.toString();
+	}
 
 
 

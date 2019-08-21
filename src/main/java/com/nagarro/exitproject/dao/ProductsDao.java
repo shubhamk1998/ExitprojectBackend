@@ -1,6 +1,6 @@
 package com.nagarro.exitproject.dao;
 
-interface ProductsDao {
+public interface ProductsDao {
 
 	String getproducts(String sellerid);
 
@@ -12,5 +12,8 @@ interface ProductsDao {
 
 	String addproduct(String name, String shortDes, String longDes, String dimensions, Double mrp, Double ssp,
 			Double ymp, String images);
+
+	String editproduct(String productid, String name,String shortDes, String longDes, String dimensions, Double  mrp , Double ssp, Double ymp, String images );
+
 
 }

@@ -73,29 +73,7 @@ public class SellerRestController {
 	
 	
 	
-	@GET
-	@Path("/getproducts")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getproducts(@QueryParam("SellerId") String SellerId) throws ParseException {
-		return this.sellerService.getproducts(SellerId);
-	}
-	
-	
-	@GET
-	@Path("/getproduct")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getproduct(@QueryParam("productid") String productid) throws ParseException {
-		return this.sellerService.editproduct(productid);
-	}
-	
-	@POST
-	@Path("/editproduct")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String editproduct(@QueryParam("productid") String productid) throws ParseException {
-		return this.sellerService.editproduct(productid);
-	}
-	
-	
+
 //	@DELETE
 //	@Path("/deleteproduct")
 //	@Produces(MediaType.TEXT_PLAIN)

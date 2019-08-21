@@ -16,21 +16,20 @@ public interface SellersDao {
 	public String register(String email, String companyName, String address, String gst, String mobile, String password,
 			String userName);
 	
-	public String addproduct(String name,String shortDes, String longDes, String dimensions, Double  mrp , Double ssp, Double ymp, String images ) ;
-	
-	public String editproduct(String productid, String name,String shortDes, String longDes, String dimensions, Double  mrp , Double ssp, Double ymp, String images );
+
+	public String searchsellers(String query, String options);
 
 
-	public String getproducts(String sellerid);
+	public String filtersellers(String query, String options);
 
 
-	public String getproduct(String productid);
+	public String getsellers();
 
 
-	public String searchproducts(String query, String options);
+	public String getseller(String sellerid);
 
 
-	public String filterproducts(String query, String options);
+	String sortsellers(String query, String options);
 
 
 	

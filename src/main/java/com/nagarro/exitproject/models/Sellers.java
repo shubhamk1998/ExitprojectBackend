@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.json.simple.JSONObject;
+
 
 @Entity
 @Table(name="Sellers")
@@ -33,6 +35,30 @@ public class Sellers {
     
     @Column(name = "Status")
     private String status;
+    
+    @Column(name = "Created")
+    private String created;
+    
+
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
+	}
+
+	@SuppressWarnings("unchecked")
+	public String toString() {
+		JSONObject obj = new JSONObject();
+		obj.put("Email", this.getEmail() );
+		obj.put("userName",this.getUserName());
+		obj.put("CompanyName",this.getAddress());
+		obj.put("Mobile",this.getMobile());
+		obj.put("Password", this.getPassword());
+		obj.put("Status", this.getStatus());
+		return obj.toString();
+	}
     
     public String getEmail() {
 		return email;
@@ -89,6 +115,10 @@ public class Sellers {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+
+	
+	
 
 	
     

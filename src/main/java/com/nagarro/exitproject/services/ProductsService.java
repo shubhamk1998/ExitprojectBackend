@@ -1,6 +1,6 @@
 package com.nagarro.exitproject.services;
 
-interface ProductsService {
+public interface ProductsService {
 
 	String getproducts(String sellerid);
 

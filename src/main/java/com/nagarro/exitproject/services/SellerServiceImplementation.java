@@ -45,13 +45,13 @@ public class SellerServiceImplementation implements SellerService {
 	@Override
 	@Transactional
 	public String getsellers() {
-		return this.sellersDao.getSellers();
+		return this.sellersDao.getsellers();
 	}
 	
 	@Override
 	@Transactional
 	public String getseller(String sellerid) {
-		return this.sellersDao.getSeller(sellerid);
+		return this.sellersDao.getseller(sellerid);
 	}
 	
 	
