@@ -2,7 +2,7 @@ package com.nagarro.exitproject.dao;
 
 public interface ProductsDao {
 
-	String getproducts(String sellerid);
+	String getproducts();
 
 	String getproduct(String productid);
 

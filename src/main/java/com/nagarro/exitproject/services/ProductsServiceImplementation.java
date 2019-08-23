@@ -14,9 +14,8 @@ public class ProductsServiceImplementation implements ProductsService{
 	
 	@Override
 	@Transactional
-	public String getproducts(String sellerid) {
-		return this.productsDao.getproducts(sellerid);
-	
+	public String getproducts() {
+		return this.productsDao.getproducts();
 	}
 
 	@Override
@@ -25,11 +24,19 @@ public class ProductsServiceImplementation implements ProductsService{
 		return this.productsDao.getproduct(productid);
 	}
 
-	
+	@Override
+	public String editproduct(String productid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-	@Transactional
-	public String editproduct(String productid) {
-		return  this.productsDao.editproduct(productid);
+	public String addproduct(String productid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	
+
+
 }

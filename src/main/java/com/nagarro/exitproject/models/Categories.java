@@ -2,6 +2,7 @@ package com.nagarro.exitproject.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 @Table(name="Categories")
 public class Categories { 
 
+	@Id
 	@Column(name = "Name")
 	private String Name;
 

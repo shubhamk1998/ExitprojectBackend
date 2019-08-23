@@ -22,14 +22,14 @@ public interface SellersDao {
 
 	public String filtersellers(String query, String options);
 
-
+	public String sortsellers(String query, String options);
+	
 	public String getsellers();
 
 
 	public String getseller(String sellerid);
 
 
-	String sortsellers(String query, String options);
 
 
 	

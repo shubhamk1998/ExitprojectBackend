@@ -13,14 +13,13 @@ public interface SellerService {
 
 	public String register(String Email, String CompanyName, String Address, String GST, String Mobile, String Password,String userName);
 
-	public String getproduct(String productid);
-
-	public String editproduct(String productid);
-	
-	public String getproducts(String sellerid);
 
 	public String getsellers();
 
 	public String getseller(String sellerid);
+
+	public String searchsellers(String query, String options);
+
+	public String filtersellers(String query, String options);
 
 }

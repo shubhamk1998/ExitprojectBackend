@@ -22,8 +22,8 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	<context:component-scan base-package="com.nagarro.restapp" />
+
+	<context:component-scan base-package="com.nagarro.exitproject" />
 
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -40,8 +40,10 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
-				<beans:value>com.nagarro.restapp.models.User</beans:value>
-				<beans:value>com.nagarro.restapp.models.Flights</beans:value>
+				<beans:value>com.nagarro.exitproject.models.Admins</beans:value>
+				<beans:value>com.nagarro.exitproject.models.Categories</beans:value>
+				<beans:value>com.nagarro.exitproject.models.Products</beans:value>
+				<beans:value>com.nagarro.exitproject.models.Sellers</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -49,26 +51,29 @@
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
 				</beans:prop>
 				<beans:prop key="hibernate.show_sql">true</beans:prop>
-				<beans:prop key="hibernate.current_session_context_class">thread</beans:prop>	
-				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>		
-				<beans:prop key="hibernate.enable_lazy_load_no_trans">true</beans:prop>									
+				<beans:prop key="hibernate.current_session_context_class">thread</beans:prop>
+				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
+				<beans:prop key="hibernate.enable_lazy_load_no_trans">true</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-	
-	<beans:bean id="SellersDao" class="com.nagarro.exitproject.dao.SellersDaoImplementation">
+
+	<beans:bean id="AdminsDao"
+		class="com.nagarro.exitproject.dao.AdminsDaoImplementation">
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
-	<beans:bean id="loginService" class="com.nagarro.restapp.services.LoginServiceImplementation">
-		<beans:property name="SellersDao" ref="SellersDao"></beans:property>
+	<beans:bean id="AdminService"
+		class="com.nagarro.exitproject.services.AdminServiceImplementation">
+		<beans:property name="AdminsDao" ref="AdminsDao"></beans:property>
 	</beans:bean>
-	
-	
-	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
-	<beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<beans:bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<beans:property name="sessionFactory" ref="sessionFactory" />
-	</beans:bean>	
-	
+	</beans:bean>
+
 </beans:beans>

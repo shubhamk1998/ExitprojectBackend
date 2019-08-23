@@ -17,12 +17,12 @@ import com.nagarro.exitproject.services.AdminService;
 @Controller
 public class AdminController {
 
-	private AdminService loginService;
+	private AdminService AdminService;
 
 	@Autowired(required = true)
-	@Qualifier(value = "loginService")
-	public void setLoginService(AdminService ls) {
-		this.loginService = ls;
+	@Qualifier(value = "AdminService")
+	public void setAdminService(AdminService ls) {
+		this.AdminService = ls;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -31,19 +31,19 @@ public class AdminController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/Login", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, @RequestParam String username, @RequestParam String password,
-			ModelAndView m) {
-		if (this.loginService.userAuthentication(username, password)) {
-			Sellers user = this.loginService.getUserDetails(username);
-			request.getSession().setAttribute("authorized", true);
-			request.getSession().setAttribute("user", user.getFullName());
-			return "index";
-		} else {
-			request.setAttribute("authorized", false);
-			request.getSession().setAttribute("message", "Wrong Credentials");
-
-			return "login";
-		}
-	}
+//	@RequestMapping(value = "/Login", method = RequestMethod.POST)
+//	public String login(HttpServletRequest request, @RequestParam String username, @RequestParam String password,
+//			ModelAndView m) {
+//		if (this.loginService.userAuthentication(username, password)) {
+//			Sellers user = this.loginService.getUserDetails(username);
+//			request.getSession().setAttribute("authorized", true);
+//			request.getSession().setAttribute("user", user.getFullName());
+//			return "index";
+//		} else {
+//			request.setAttribute("authorized", false);
+//			request.getSession().setAttribute("message", "Wrong Credentials");
+//
+//			return "login";
+//		}
+//	}
 }

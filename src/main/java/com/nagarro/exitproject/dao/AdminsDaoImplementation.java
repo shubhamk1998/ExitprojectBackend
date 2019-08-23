@@ -32,23 +32,23 @@ public class  AdminsDaoImplementation implements AdminsDao {
 	@Transactional
 	public Boolean userAuthentication(String username, String password) {
 
-		
-               Session session = this.sessionFactory.getCurrentSession();
-               Transaction tx = session.beginTransaction();  
-
-               try {
-            	   Sellers user = (Sellers) session.get(Sellers.class, username);
-            	   tx.commit();
-
-                   if (user.getUsername() != null && user.getPassword().equals(password))
-                	   return true;
-                   else
-                	   return false;
-            	   
-               }
-               catch(Exception e) {
-            	   return false;
-               }
+		return false;
+//               Session session = this.sessionFactory.getCurrentSession();
+//               Transaction tx = session.beginTransaction();  
+//
+//               try {
+//            	   Sellers user = (Sellers) session.get(Sellers.class, username);
+//            	   tx.commit();
+//
+//                   if (user.getUsername() != null && user.getPassword().equals(password))
+//                	   return true;
+//                   else
+//                	   return false;
+//            	   
+//               }
+//               catch(Exception e) {
+//            	   return false;
+//               }
                
     }
 

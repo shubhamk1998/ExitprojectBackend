@@ -53,20 +53,34 @@ public class SellerRestController {
 	}
 	
 	
-	@POST
+	@GET
 	@Path("/getsellers")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getsellers(@QueryParam("Email") String Email,@QueryParam("CompanyName") String CompanyName,@QueryParam("Address") String Address,@QueryParam("GST") String GST,@QueryParam("Mobile") String Mobile,@QueryParam("Password") String Password,@QueryParam("userName") String userName) throws ParseException {
-		return this.sellerService.getSellers();
+		return this.sellerService.getsellers();
 	}
 	
 	
-	@POST
+	@GET      
 	@Path("/getseller")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getseller(@QueryParam("sellerid") String sellerid) throws ParseException {
-		String response = this.sellerService.getseller(sellerid);
-		return response;
+		return  this.sellerService.getseller(sellerid);
+	}
+	
+	
+	@GET
+	@Path("/filtersellers")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String filtersellers(@QueryParam("query") String query,@QueryParam("options") String options) {
+		return  this.filtersellers(query, options);	
+	}
+
+	@GET
+	@Path("/sortsellers")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String sortsellers(@QueryParam("query") String query,@QueryParam("options") String options) {
+		return  this.sortsellers(query, options);	
 	}
 	
 	
@@ -81,35 +95,35 @@ public class SellerRestController {
 //		return this.sellerService.deleteUser(productid);
 //	}
 	
-	@POST
-	@Path("/upload")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String bulkupload(@FormDataParam("file") InputStream uploadedInputStream)
-			throws UnsupportedEncodingException, IOException {
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(uploadedInputStream, "UTF-8"))) {
-			String csvdata = br.lines().collect(Collectors.joining(System.lineSeparator())).substring(1);
-			String[] lines = csvdata.split("\n");
-			String str = "";
-			Boolean error = false;
-			for (String line : lines) {
-				String[] data = line.split(",");
-				String Name = data[0];
-				String Email = data[1];
-				String dOB = data[2];
-				String location = data[3];
-				if ((this.sellerService.CreateUser(Name, Email, dOB, location).equals("Error"))) {
-					error = true;
-					str = str + "," + Email;
-				}
-			}
-			if (!error) {
-				str = str + "Created";
-			}
-			return str;
-		}
-
-	}
+//	@POST
+//	@Path("/upload")
+//	@Consumes(MediaType.MULTIPART_FORM_DATA)
+//	@Produces(MediaType.TEXT_PLAIN)
+//	public String bulkupload(@FormDataParam("file") InputStream uploadedInputStream)
+//			throws UnsupportedEncodingException, IOException {
+//		try (BufferedReader br = new BufferedReader(new InputStreamReader(uploadedInputStream, "UTF-8"))) {
+//			String csvdata = br.lines().collect(Collectors.joining(System.lineSeparator())).substring(1);
+//			String[] lines = csvdata.split("\n");
+//			String str = "";
+//			Boolean error = false;
+//			for (String line : lines) {
+//				String[] data = line.split(",");
+//				String Name = data[0];
+//				String Email = data[1];
+//				String dOB = data[2];
+//				String location = data[3];
+//				if ((this.sellerService.CreateUser(Name, Email, dOB, location).equals("Error"))) {
+//					error = true;
+//					str = str + "," + Email;
+//				}
+//			}
+//			if (!error) {
+//				str = str + "Created";
+//			}
+//			return str;
+//		}
+//
+//	}
 
 //	@GET
 //	@Path("/downloadCSV")

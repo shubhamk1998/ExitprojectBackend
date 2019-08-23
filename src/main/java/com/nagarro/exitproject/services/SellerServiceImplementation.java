@@ -55,6 +55,20 @@ public class SellerServiceImplementation implements SellerService {
 	}
 	
 	
+	@Override
+	@Transactional
+	public String searchsellers(String query, String options) {
+		return this.sellersDao.searchsellers(query,options);
+		
+	}
+	
+	
+	@Override
+	@Transactional
+	public String filtersellers(String query, String options) {
+		return this.sellersDao.filtersellers(query,options);
+	}
+
 
 
 //	@Override

@@ -17,7 +17,7 @@ import org.json.simple.JSONObject;
 @Table(name="Products")
 public class Products { 
 	
-	
+	//Add Attribute Color,Ratings,Brand,Warranty , Catergories
 	
      	@Id 
      	@Column(name="YmartId")

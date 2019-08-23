@@ -12,7 +12,7 @@ public class AdminServiceImplementation implements AdminService {
 
 	private AdminsDao adminsDao;
 
-	public void setUserDao(AdminsDao AdminsDao) {
+	public void setAdminsDao(AdminsDao AdminsDao) {
 		this.adminsDao = AdminsDao;
 	}
 	

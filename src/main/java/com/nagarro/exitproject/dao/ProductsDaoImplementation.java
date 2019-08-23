@@ -21,11 +21,11 @@ public class ProductsDaoImplementation implements ProductsDao {
 
 	@Override
 	@Transactional
-	public String getproducts(String sellerid) {
+	public String getproducts() {
 		Session session = this.sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		Criteria cr = session.createCriteria(Products.class);
-		cr.add(Restrictions.eq("", sellerid));
+//		cr.add(Restrictions.eq("", sellerid));
 		List<Sellers> results = cr.list();
 		tx.commit();
 		return results.toString();
