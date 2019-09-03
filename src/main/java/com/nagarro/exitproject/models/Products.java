@@ -1,5 +1,6 @@
 package com.nagarro.exitproject.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,12 +18,78 @@ import org.json.simple.JSONObject;
 @Table(name="Products")
 public class Products { 
 	
-	//Add Attribute Color,Ratings,Brand,Warranty , Catergories
 	
      	@Id 
      	@Column(name="YmartId")
      	@GeneratedValue(strategy=GenerationType.AUTO) 
-     	long YmartId;
+     	private long YmartId;
+     	
+     	
+     	@Column(name = "Color")
+	    private String Color;
+     	
+     	@Column(name = "Comments")
+	    private ArrayList<String> comments;
+     	
+     	public ArrayList<String> getComments() {
+			return comments;
+		}
+
+		public void setComments(ArrayList<String> comments) {
+			this.comments = comments;
+		}
+
+		@Column(name = "Ratings")
+	    private String Ratings;
+     	
+     	@Column(name = "Warranty")
+	    private String Warranty;
+     	
+     	@Column(name = "Categories")
+	    private String Categories;
+     	
+     	@Column(name = "Created")
+	    private String Created;
+
+		public String getCreated() {
+			return Created;
+		}
+
+		public void setCreated(String created) {
+			Created = created;
+		}
+
+		public String getColor() {
+			return Color;
+		}
+
+		public void setColor(String color) {
+			Color = color;
+		}
+
+		public String getRatings() {
+			return Ratings;
+		}
+
+		public void setRatings(String ratings) {
+			Ratings = ratings;
+		}
+
+		public String getWarranty() {
+			return Warranty;
+		}
+
+		public void setWarranty(String warranty) {
+			Warranty = warranty;
+		}
+
+		public String getCategories() {
+			return Categories;
+		}
+
+		public void setCategories(String categories) {
+			Categories = categories;
+		}
 
 		@Column(name = "Name")
 	    private String name;
@@ -41,10 +108,10 @@ public class Products {
 			this.sellerCode = sellerCode;
 		}
 
-		@Column(name = "shortDes")
+		@Column(name = "shortDes",columnDefinition = "TEXT")
 	    private String shortDes;
 	    
-	    @Column(name = "longDes")
+	    @Column(name = "longDes",columnDefinition = "TEXT")
 	    private String longDes;
 	    
 	    @Column(name = "dimensions")
@@ -179,6 +246,14 @@ public class Products {
 			obj.put("YMP",this.getYMP() );
 			obj.put("Images",this.getImages());
 			obj.put("Instructions",this.getInstructions());
+			obj.put("YmartId", this.getYmartId());
+			obj.put("Created", this.getCreated());
+			obj.put("Status", this.getStatus());
+			obj.put("SellerProductCode", this.getSellerproductCode());
+			obj.put("Comments", this.getComments() );
+			obj.put("Categories", this.getCategories() );
+			obj.put("Warranty", this.getWarranty() );
+
 			return obj.toString();
 		}
 

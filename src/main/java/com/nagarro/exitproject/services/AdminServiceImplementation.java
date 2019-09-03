@@ -2,6 +2,7 @@ package com.nagarro.exitproject.services;
 
 
 import com.nagarro.exitproject.dao.AdminsDao;
+import com.nagarro.exitproject.models.Admins;
 import com.nagarro.exitproject.models.Sellers;
 
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class AdminServiceImplementation implements AdminService {
 
     @Override
     @Transactional
-    public Sellers getUserDetails(String username) {
+    public Admins getUserDetails(String username) {
     	return this.adminsDao.getUserDetails(username);
     }
 

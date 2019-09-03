@@ -2,8 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.nagarro.restapp.models.Flights"%>
-<%@ page import="com.nagarro.restapp.models.User"%>
+<%@ page import="com.nagarro.exitproject.models.Sellers"%>
+<%@ page import="com.nagarro.exitproject.models.Products"%>
 
 
 
@@ -183,13 +183,13 @@
 	</div>
 	</div>
 	<script>
-		var baseurl = "http://localhost:3000/RestApp/rest/Users/";
+		var sellersbaseurl = "http://localhost:3000/RestApp/rest/sellers/";
 
 		function loadall() {
 			console.log("loadcallled");
 			$
 					.ajax({
-						url : baseurl + 'getallusers',
+						url : sellersbaseurl + 'getsellers',
 						type : "GET",
 						beforeSend : function() {
 							//  $('#current_page').append("loading..");
@@ -204,15 +204,13 @@
 												$('#usertable > tbody')
 														.append(
 																'<tr><td>'
-																		+ element['Id']
+																		+ element['ID']
 																		+ '</td><td>'
-																		+ element['Name']
+																		+ element['userName']
 																		+ '</td><td>'
 																		+ element['Email']
 																		+ '</td><td>'
-																		+ element['Location']
-																		+ '</td><td>'
-																		+ element['DOB']
+																		+ element['Status']
 																		+ '</td><td><button class="btn btn-success" onclick="edit('
 																		+ element['Id']
 																		+ ')" >Edit</button </td>&nbsp;<button class="btn btn-danger" onclick="delet('

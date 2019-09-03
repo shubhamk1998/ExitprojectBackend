@@ -1,21 +1,32 @@
 package com.nagarro.exitproject.controllers;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.nagarro.exitproject.models.Sellers;
 import com.nagarro.exitproject.services.AdminService;
 
-@Controller
+
+@CrossOrigin
+@Path("/admin")
 public class AdminController {
+
+	
+	private Response buildresponse(String response) {
+		
+		return Response.ok().entity(response)
+			      .header("Access-Control-Allow-Origin", "*")
+			      .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+			      .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+	}
 
 	private AdminService AdminService;
 
@@ -24,26 +35,32 @@ public class AdminController {
 	public void setAdminService(AdminService ls) {
 		this.AdminService = ls;
 	}
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String redirect(HttpServletRequest request) {
-		request.getSession().setAttribute("message", "");
-		return "login";
+	
+	@POST
+	@Path("/login")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response login(@QueryParam("Email") String Email,@QueryParam("Password") String Password) {
+		if (this.AdminService.userAuthentication(Email, Password)) {
+			JSONObject obj = new JSONObject();
+			obj.put("User", this.AdminService.getUserDetails(Email).toString() );
+			obj.put("Status","User Found");
+			return  buildresponse(obj.toString());
+		} else {
+			return  buildresponse("No User Found");
+		}
+		
 	}
 
-//	@RequestMapping(value = "/Login", method = RequestMethod.POST)
-//	public String login(HttpServletRequest request, @RequestParam String username, @RequestParam String password,
-//			ModelAndView m) {
-//		if (this.loginService.userAuthentication(username, password)) {
-//			Sellers user = this.loginService.getUserDetails(username);
-//			request.getSession().setAttribute("authorized", true);
-//			request.getSession().setAttribute("user", user.getFullName());
-//			return "index";
-//		} else {
-//			request.setAttribute("authorized", false);
-//			request.getSession().setAttribute("message", "Wrong Credentials");
-//
-//			return "login";
-//		}
-//	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

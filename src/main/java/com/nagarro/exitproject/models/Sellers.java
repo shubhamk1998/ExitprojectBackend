@@ -4,6 +4,8 @@ package com.nagarro.exitproject.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,6 +17,14 @@ import org.json.simple.JSONObject;
 public class Sellers {
 
 	@Id
+ 	@Column(name="SellerId")
+ 	@GeneratedValue(strategy=GenerationType.AUTO) 
+ 	private long sellerId;
+ 	
+ 	public long getSellerId() {
+		return this.sellerId;
+	}
+	
     @Column(name = "Email")
     private String email;
     
@@ -51,12 +61,15 @@ public class Sellers {
 	@SuppressWarnings("unchecked")
 	public String toString() {
 		JSONObject obj = new JSONObject();
+		obj.put("ID", this.getSellerId() );
 		obj.put("Email", this.getEmail() );
 		obj.put("userName",this.getUserName());
-		obj.put("CompanyName",this.getAddress());
+		obj.put("CompanyName",this.getCompanyName());
+		obj.put("Created",this.getCreated() );
+
 		obj.put("Mobile",this.getMobile());
-		obj.put("Password", this.getPassword());
 		obj.put("Status", this.getStatus());
+
 		return obj.toString();
 	}
     

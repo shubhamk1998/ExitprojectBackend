@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import com.nagarro.exitproject.models.Admins;
 import com.nagarro.exitproject.models.Sellers;
 
 @Repository
@@ -20,10 +21,10 @@ public class  AdminsDaoImplementation implements AdminsDao {
 	
 	@Override
 	@Transactional
-	public Sellers getUserDetails(String username) {
+	public Admins getUserDetails(String username) {
 		Session session = this.sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();  
-		Sellers user = (Sellers) session.load(Sellers.class, username);
+		Admins user = (Admins) session.load(Admins.class, username);
 		tx.commit();
 		return user;
 	}
@@ -32,23 +33,22 @@ public class  AdminsDaoImplementation implements AdminsDao {
 	@Transactional
 	public Boolean userAuthentication(String username, String password) {
 
-		return false;
-//               Session session = this.sessionFactory.getCurrentSession();
-//               Transaction tx = session.beginTransaction();  
-//
-//               try {
-//            	   Sellers user = (Sellers) session.get(Sellers.class, username);
-//            	   tx.commit();
-//
-//                   if (user.getUsername() != null && user.getPassword().equals(password))
-//                	   return true;
-//                   else
-//                	   return false;
-//            	   
-//               }
-//               catch(Exception e) {
-//            	   return false;
-//               }
+               Session session = this.sessionFactory.getCurrentSession();
+               Transaction tx = session.beginTransaction();  
+
+               try {
+            	    Admins user = (Admins) session.get(Admins.class, username);
+            	   tx.commit();
+                   if (user.getName() != null && user.getPassword().equals(password))
+                	   return true;
+                   else
+                	   return false;
+                   
+            	   
+               }
+               catch(Exception e) {
+            	   return false;
+               }
                
     }
 

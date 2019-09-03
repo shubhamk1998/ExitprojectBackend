@@ -31,7 +31,7 @@ public class SellerServiceImplementation implements SellerService {
 
 	@Override
 	@Transactional
-	public Sellers login(String Email, String Password) {
+	public String login(String Email, String Password) {
 		return this.sellersDao.login(Email, Password);
 	}
 
@@ -44,8 +44,8 @@ public class SellerServiceImplementation implements SellerService {
 	
 	@Override
 	@Transactional
-	public String getsellers() {
-		return this.sellersDao.getsellers();
+	public String getsellers(String page, String count) {
+		return this.sellersDao.getsellers(page, count);
 	}
 	
 	@Override
@@ -67,6 +67,18 @@ public class SellerServiceImplementation implements SellerService {
 	@Transactional
 	public String filtersellers(String query, String options) {
 		return this.sellersDao.filtersellers(query,options);
+	}
+
+	@Transactional
+	@Override
+	public String sortsellers(String query, String options) {
+		return this.sellersDao.sortsellers(query,options);
+	}
+
+	@Transactional
+	@Override
+	public String updatestatus(String sellerid, String value) {
+		return this.sellersDao.updatestatus(sellerid,value);
 	}
 
 

@@ -1,8 +1,9 @@
 package com.nagarro.exitproject.dao;
 
+import java.util.List;
+
 public interface ProductsDao {
 
-	String getproducts();
 
 	String getproduct(String productid);
 
@@ -10,10 +11,28 @@ public interface ProductsDao {
 
 	String filterproducts(String query, String options);
 
-	String addproduct(String name, String shortDes, String longDes, String dimensions, Double mrp, Double ssp,
-			Double ymp, String images);
 
-	String editproduct(String productid, String name,String shortDes, String longDes, String dimensions, Double  mrp , Double ssp, Double ymp, String images );
+
+	String editproduct(String sellerid, String name, String longdes, String shortdes, String sellercode, Double mRP,
+			Double sSP, Double yMP, String warranty, String images, String dimensions, String status);
+
+	String getproductsbysellerid(String sellerid);
+
+
+	
+	String getallproducts();
+
+	String addproduct(String sellerid, String name, String longdes, String shortdes, String sellercode, Double mRP,
+			Double sSP, Double yMP, String warranty, String images, String dimensions, String category);
+
+	String getcategories();
+
+	String updatestatus(String sellerid, String value, String comment);
+
+	String addcategories(String query);
+
+	String deletecategories(String query);
+
 
 
 }

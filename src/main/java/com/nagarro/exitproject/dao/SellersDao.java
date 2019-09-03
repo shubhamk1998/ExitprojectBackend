@@ -10,7 +10,7 @@ import com.nagarro.exitproject.models.Sellers;
 public interface SellersDao {
 
 
-	public Sellers login(String Email, String Password) ;
+	public String login(String Email, String Password) ;
 
 
 	public String register(String email, String companyName, String address, String gst, String mobile, String password,
@@ -24,10 +24,15 @@ public interface SellersDao {
 
 	public String sortsellers(String query, String options);
 	
-	public String getsellers();
 
 
 	public String getseller(String sellerid);
+
+
+	public String updatestatus(String sellerid, String value);
+
+
+	String getsellers(String page, String count);
 
 
 

@@ -18,6 +18,14 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 public class Admins {
 
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public void setName(String name) {
 		Name = name;
 	}
@@ -29,10 +37,13 @@ public class Admins {
 	@Column(name = "Name")
 	private String Name;
 
-
 	@Id
 	@Column(name = "Email")
 	private String Email;
+	
+	
+	@Column(name = "password")
+	private String password;
 
 
 	public Admins() {

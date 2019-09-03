@@ -6,6 +6,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
+import com.nagarro.exitproject.controllers.AdminController;
 import com.nagarro.exitproject.controllers.ProductRestController;
 import com.nagarro.exitproject.controllers.SellerRestController;
 import com.nagarro.exitproject.dao.ProductsDao;
@@ -22,6 +23,7 @@ public class MyApplication extends ResourceConfig {
 		register(MultiPartFeature.class);
 		register(RequestContextFilter.class);
 		register(SellerRestController.class);
+		register(AdminController.class);
 		register(ProductRestController.class);
 		 register(new AbstractBinder() {
 	            @Override
